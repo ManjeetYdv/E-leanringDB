@@ -1,8 +1,10 @@
 package com.example.SpringJPAProject.Service;
 
 import com.example.SpringJPAProject.Entity.Author;
+import com.example.SpringJPAProject.Entity.Course;
 import com.example.SpringJPAProject.Exception.AuthorNotFoundException;
 import com.example.SpringJPAProject.Repository.AuthorRepository;
+import com.example.SpringJPAProject.Repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,9 @@ public class AuthorService {
 
     private final AuthorRepository authorRepository;
 
+
     @Autowired
-    public AuthorService(AuthorRepository authorRepository) {
+    public AuthorService(AuthorRepository authorRepository, CourseRepository courseRepository) {
         this.authorRepository = authorRepository;
     }
 
@@ -29,7 +32,7 @@ public class AuthorService {
     }
 
     // Get author by username(id)
-    public Author getAuthorByUsername(String username) {
+    public Author findById(String username) {
         return authorRepository.findById(username) // Use username as the primary key
                 .orElseThrow(() -> new AuthorNotFoundException("Author Not Found with username: " + username));
     }
@@ -37,7 +40,7 @@ public class AuthorService {
     // Update author by username
     public Author updateAuthor(String username, Author updatedAuthor) {
         // Check if the author exists
-        Author existingAuthor = getAuthorByUsername(username);
+        Author existingAuthor = findById(username);
         existingAuthor.setName(updatedAuthor.getName());
         existingAuthor.setEmail(updatedAuthor.getEmail()); // Assuming Email can be updated
         // Add other fields as necessary
@@ -47,7 +50,7 @@ public class AuthorService {
     // Delete author by username
     public void deleteAuthor(String username) {
         // Check if the author exists
-        Author author = getAuthorByUsername(username);
+        Author author = findById(username);
         authorRepository.delete(author);
     }
 
@@ -63,4 +66,9 @@ public class AuthorService {
     public long countAuthors() {
         return authorRepository.count();
     }
+    public List<Course> getAllCoursesByAuthor(String username){
+        Author author= authorRepository.findById(username).orElseThrow(()->new AuthorNotFoundException("Author Not Found with username: " + username));
+        return author.getCourseList();
+    }
+
 }
