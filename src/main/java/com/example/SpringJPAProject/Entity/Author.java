@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Author {
+public class Author extends BaseEntity {
     @Id
     private String username;
     private String name;

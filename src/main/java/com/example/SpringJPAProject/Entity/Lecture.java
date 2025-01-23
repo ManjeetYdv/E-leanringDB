@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Lecture {
+public class Lecture extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

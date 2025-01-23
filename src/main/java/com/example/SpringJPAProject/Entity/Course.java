@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Course {
+public class Course extends BaseEntity{
     @Id
     private String courseId;
     private String title;

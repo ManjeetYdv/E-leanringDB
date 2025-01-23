@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Section {
+public class Section extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
