@@ -35,4 +35,7 @@ public class Author {
     @ManyToMany(cascade = CascadeType.ALL, mappedBy = "authorsList")
     private List<Course> courseList;
 
+    public List<Course> getCourseList() {
+        return courseList;
+    }
 }

@@ -6,25 +6,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Entity
-@Table(name="section")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
-public class Section {
+public class Resource {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String name;
-    private int SectionOrder;
+    private String url;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "course_id")
-    private Course course;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "section")
-    private List<Lecture> lectureList;
+    @OneToOne
+    @JoinColumn(name="lecture_id")
+    private Lecture lecture;
 }

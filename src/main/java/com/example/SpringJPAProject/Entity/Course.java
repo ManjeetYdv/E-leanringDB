@@ -26,4 +26,11 @@ public class Course {
             inverseJoinColumns=@JoinColumn(name = "author_id")
     )
     private List<Author> authorsList;
+
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
+    private List<Section> sectionList;
+
+    public List<Author> getAuthorsList() {
+        return authorsList;
+    }
 }

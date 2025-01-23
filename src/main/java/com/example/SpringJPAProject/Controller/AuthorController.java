@@ -30,7 +30,7 @@ public class AuthorController {
     // Get an author by ID
     @GetMapping("/{username}")
     public Author getAuthorById(@PathVariable String username) {
-        return authorService.getAuthorByUsername(username);
+        return authorService.findById(username);
     }
 
     // Create a new author
